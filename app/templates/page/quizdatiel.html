@@ -1,0 +1,35 @@
+{% extends "_base.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class=" max-w-[1000px] w-full">
+    <div id="close-box" class="flex flex-row  justify-around items-center  ">
+        <div class=" mx-[50px] flex flex-row ">
+            <p>{{quiz.name}}-</p><br>{{quiz.utish_foizi}} %</br>
+            
+        </div>
+        <div class=" text-red-600 mx-[50px]" id="timer-box">
+        </div>
+    </div>
+    <div id="quiz-form" class="mt-[70px] w-full flex flex-col items-center h-screen border-2  ">
+        <form  class="bg-white w-full  shadow-md border-3 rounded px-8  pb-8 mb-4 max-w-[550px] md:max-w-[720px] lg:max-w-[850px] " >
+          {% csrf_token %}
+          <div class="" id="quiz-box"></div>
+          <button type="submit" class=" bg-black rounded-md text-green-600 px-6 py-2">btn</button>
+    
+        </form>
+    </div>
+    <div id="close-box" class="flex flex-col md:flex-row  justify-around items-center  ">
+        <div id="scrore-box">
+        </div>
+        <div id="resault-box">
+        </div>
+    </div>
+    
+<div>
+
+
+<!--data js--> 
+  
+{% endblock content %}

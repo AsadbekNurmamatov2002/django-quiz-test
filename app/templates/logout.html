@@ -1,0 +1,12 @@
+<!-- templates/index.html -->
+{% extends "_base.html" %}
+{% load static %}
+
+{% block content %}
+  <div class="flex justify-center items-center w-full h-[100vh]">
+    <form active="" method="POST">
+      {% csrf_token %}
+    <button class="text-xl text-white bg-blue-600 hover:bg-blue-500 hover:text-red-700 px-4 py-2 rounded-md" type="submit">Chiqish !!!</button>
+    </form>
+  </div>
+{% endblock content %}

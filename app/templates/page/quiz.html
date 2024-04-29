@@ -1,0 +1,132 @@
+{% extends "_base.html" %}
+
+{% block content %}
+
+    <!-- modal dialog -->
+
+      <div id="modal-container" class="hidden fixed inset-0 z-50 overflow-y-auto">
+    
+        <div class="modal-background bg-white rounded-2xl shadow-lg flex items-center justify-center flex-col  border-2 border-black h-[100vh] bg-opacity-1">
+    
+          <div class="modal-box relative bg-white rounded-lg shadow-lg max-w-[500px] p-6 max-h-[600px] flext items-center justify-center">
+    
+            <button id="modal-close-btn" class="modal-close absolute top-0 right-0 m-4">
+    
+              <svg class="h-6 w-6 text-gray-400 hover:text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+    
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+    
+              </svg>
+    
+            </button>
+    
+            <div  id="model-body">
+    
+            </div>
+            
+            <button id="btn-start" 
+            class="select-none  rounded-lg bg-gray-900 py-3 px-4 md:py-3 md:px-6 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-blue-500/20 transition-all hover:shadow-lg hover:shadow-blue-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none  max-w-[500px] w-full">
+            Boshlash</button>
+          </div>
+            
+        </div>
+    
+      </div>
+    
+      
+      <!-- open button -->
+      <div class="bg-gray-100">
+        <div class="container mx-auto py-8">
+            <div class="grid grid-cols-4 md:grid-cols-12 gap-4 px-4">
+                <div class="col-span-4 md:col-span-4 ">
+                    <div class="bg-white shadow rounded-lg p-6">
+                        <div class="flex flex-col items-center">
+                            <img src="{{user_profil.image.url}}" class="w-32 h-32 bg-gray-300 rounded-full mb-4 shrink-0">
+    
+                            </img>
+                            <h1 class="text-xl font-bold">{{user.first_name}}</h1>
+                            <p class="text-gray-700">{{user.email}}</p>
+                            <p>{{user_profil.bio}}</p>
+                            <div class="mt-6 flex flex-wrap gap-4 justify-center">
+                                <a href="{% url "users:edit" %}" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded">O'zgartirish</a>
+                                <a href="{% url "users:logout" %}" class="bg-gray-300 hover:bg-gray-400 text-gray-700 py-2 px-4 rounded">Chiqish</a>
+                            </div>
+                        </div>
+                        <hr class="my-6 border-t border-gray-300">
+                        <div class="flex flex-col">
+                            <span class="text-gray-700 uppercase font-bold tracking-wider mb-2">Natijalar</span>
+                            <ul>
+                              {% for r in results %}
+                                <li class="mb-2 text-center">{{r.quiz}} <p class="rounded-md text-center{% if r.score >= 60 %} bg-blue-500 {% else %} bg-red-600 {% endif %}">{{r.score}}%</p></li><hr>
+                              {% endfor %}
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-span-4 md:col-span-8 lg:md:col-span-8">
+                    <div class="bg-white shadow rounded-lg p-6">
+
+
+                      <h2 class="text-xl text-center font-bold mt-6 mb-4 bg-gradient-to-r from-primary to-danger bg-clip-text text-transparent">Testlar Ro'yhati</h2>
+                        {% for quiz in quizs %}
+                        <div class="mb-5 flex flex-col gap-6">
+                            <div class="flex justify-between flex-wrap gap-2 w-full">
+                                <span class="text-gray-700 font-bold">{{quiz.name}}</span>
+                                <p>
+                                    <span class="text-gray-700 mr-2">Test vaqti :{{quiz.vaqti}}</span>
+                                    <span class="text-gray-700">Test Soni: {{quiz.test_soni}}</span>
+                                </p>
+                            </div>
+                            <p class="mt-2">
+                                {{quiz.body}}
+                            </p>
+                            <button
+                            data-pk="{{quiz.id}}"
+                            data-name="{{quiz.name}}"
+                            data-body="{{quiz.body}}"
+                  
+                            data-soni="{{quiz.test_soni}}"
+                            data-foiz="{{quiz.utish_foizi}}"
+                            data-vaqt="{{quiz.vaqti}}"
+                           id="modal-open-btn"
+                           class="model-btn select-none rounded-lg bg-gray-900 py-3 px-4 md:py-3 md:px-6 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-blue-500/20 transition-all hover:shadow-lg hover:shadow-blue-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
+                            Testni Boshlash
+                      
+                          </button>
+                           {% endfor %}
+                        </div>
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  
+      <script>
+        function openModal() {
+          $('#modal-container').removeClass('hidden');
+        }
+        function closeModal() {
+          $('#modal-container').addClass('hidden');
+    
+        }
+        $('.model-btn').on('click', function() {
+          openModal();
+    
+        });
+    
+        $('#modal-close-btn').on('click', function() {
+          closeModal();
+        });
+    
+        $(document).on('keydown', function(event) {
+          if (event.key === 'Escape') {
+            closeModal();
+          }
+    
+        });
+    
+      </script>
+{% endblock content %}
