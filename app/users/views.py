@@ -28,9 +28,9 @@ def login_request(request):
             user=authenticate(request, email=cd['email'], password=cd['password'])
             if user is not None:
                 login(request, user)
-                return HttpResponse('Authenticated successfully')
+                return HttpResponse('Kirish Yahshibajarildi!') and redirect('quizes:quizlist')
             else:
-                return HttpResponse('Invalid login')
+                return HttpResponse('Siz Ro\'yhatdan o\'tmagansiz?')
     else:
         form = LoginForm()
     return render(request, template_name="authuser/login.html", context={"form":form})

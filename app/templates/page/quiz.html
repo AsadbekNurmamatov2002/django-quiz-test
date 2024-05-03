@@ -3,35 +3,11 @@
 {% block content %}
 
     <!-- modal dialog -->
+  
 
-      <div id="modal-container" class="hidden fixed inset-0 z-50 overflow-y-auto">
     
-        <div class="modal-background bg-white rounded-2xl shadow-lg flex items-center justify-center flex-col  border-2 border-black h-[100vh] bg-opacity-1">
-    
-          <div class="modal-box relative bg-white rounded-lg shadow-lg max-w-[500px] p-6 max-h-[600px] flext items-center justify-center">
-    
-            <button id="modal-close-btn" class="modal-close absolute top-0 right-0 m-4">
-    
-              <svg class="h-6 w-6 text-gray-400 hover:text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-    
-                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-    
-              </svg>
-    
-            </button>
-    
-            <div  id="model-body">
-    
-            </div>
-            
-            <button id="btn-start" 
-            class="select-none  rounded-lg bg-gray-900 py-3 px-4 md:py-3 md:px-6 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-blue-500/20 transition-all hover:shadow-lg hover:shadow-blue-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none  max-w-[500px] w-full">
-            Boshlash</button>
-          </div>
-            
-        </div>
-    
-      </div>
+          
+ 
     
       
       <!-- open button -->
@@ -82,7 +58,9 @@
                             <p class="mt-2">
                                 {{quiz.body}}
                             </p>
-                            <button
+                          <label for="my-modal-3" class="btn">Testni Boshlash</label>
+                            {% comment %} <input
+                            type="checkbox"
                             data-pk="{{quiz.id}}"
                             data-name="{{quiz.name}}"
                             data-body="{{quiz.body}}"
@@ -90,11 +68,34 @@
                             data-soni="{{quiz.test_soni}}"
                             data-foiz="{{quiz.utish_foizi}}"
                             data-vaqt="{{quiz.vaqti}}"
-                           id="modal-open-btn"
-                           class="model-btn select-none rounded-lg bg-gray-900 py-3 px-4 md:py-3 md:px-6 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-blue-500/20 transition-all hover:shadow-lg hover:shadow-blue-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
+                            id="my-modal-3"
+                           class="modal-toggle select-none rounded-lg bg-gray-900 py-3 px-4 md:py-3 md:px-6 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-blue-500/20 transition-all hover:shadow-lg hover:shadow-blue-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
                             Testni Boshlash
                       
-                          </button>
+                          </button> {% endcomment %}
+                          <input 
+                            data-pk="{{quiz.id}}"
+                            data-name="{{quiz.name}}"
+                            data-body="{{quiz.body}}"
+                  
+                            data-soni="{{quiz.test_soni}}"
+                            data-foiz="{{quiz.utish_foizi}}"
+                            data-vaqt="{{quiz.vaqti}}"
+                            type="checkbox" 
+                            id="my-modal-3" 
+                            class="modal-toggle model-btn" />
+
+                          <div class="modal">
+                            <div class="modal-box relative">
+                              <label for="my-modal-3" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
+                              <h3 class="text-lg font-bold pb-4">Testga tayyormisiz !</h3>
+                              <div id="model-body">
+                              </div>
+                            <button id="btn-start" 
+                            class="select-none  rounded-lg bg-gray-900 py-3 px-4 md:py-3 md:px-6 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-blue-500/20 transition-all hover:shadow-lg hover:shadow-blue-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none  max-w-[500px] w-full">
+                            Boshlash</button>
+                            </div>
+                          </div>
                            {% endfor %}
                         </div>
                        
@@ -104,29 +105,4 @@
         </div>
     </div>
   
-      <script>
-        function openModal() {
-          $('#modal-container').removeClass('hidden');
-        }
-        function closeModal() {
-          $('#modal-container').addClass('hidden');
-    
-        }
-        $('.model-btn').on('click', function() {
-          openModal();
-    
-        });
-    
-        $('#modal-close-btn').on('click', function() {
-          closeModal();
-        });
-    
-        $(document).on('keydown', function(event) {
-          if (event.key === 'Escape') {
-            closeModal();
-          }
-    
-        });
-    
-      </script>
 {% endblock content %}
